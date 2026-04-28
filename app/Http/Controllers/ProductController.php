@@ -60,7 +60,6 @@ class ProductController extends Controller
         $imageName = $product->image;
 
         if ($request->hasFile('image')) {
-            // Delete old file if exists
             if ($product->image && file_exists(public_path('uploads/' . $product->image))) {
                 unlink(public_path('uploads/' . $product->image));
             }
@@ -84,7 +83,6 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
 
-        // Image-ah file system-la irundhu remove pannuvom
         if ($product->image && File::exists(public_path('uploads/' . $product->image))) {
             File::delete(public_path('uploads/' . $product->image));
         }

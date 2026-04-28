@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function(){
     let currentPage = 1;
     let filteredRows = [...allRows];
 
-    // 1. REFRESH UI & PERSISTENCE
+    
     function refreshAll() {
         let grandTotal = 0;
         selectedItemsList.innerHTML = "";
@@ -148,7 +148,6 @@ document.addEventListener("DOMContentLoaded", function(){
         refreshAll();
     };
 
-    // 2. PAGINATION WITH PERSISTENCE
     function displayTable(page) {
         currentPage = page;
         let start = (page - 1) * rowsPerPage;
@@ -177,7 +176,6 @@ document.addEventListener("DOMContentLoaded", function(){
         paginationControls.appendChild(ul);
     }
 
-    // 3. EVENTS
     productBody.addEventListener('click', (e) => {
         let row = e.target.closest('tr');
         if(!row) return;

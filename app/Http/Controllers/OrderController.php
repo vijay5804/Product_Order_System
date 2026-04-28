@@ -57,7 +57,7 @@ class OrderController extends Controller
                         'price' => $product->price
                     ]);
 
-                    // 🔥 STOCK REDUCE
+    
                     $product->decrement('stock', $item['qty']);
                 }
             }
@@ -82,13 +82,12 @@ class OrderController extends Controller
         return view('orders.show', ['order' => $order]);
     }
 
-    /* ================= STATUS UPDATE FIX ================= */
+
 
     public function updateStatus(Request $request, $id)
     {
         $order = Order::findOrFail($id);
 
-        // 🔥 fallback if status not coming
         $status = $request->input('status', 'completed');
 
         $order->status = $status;
@@ -101,13 +100,11 @@ class OrderController extends Controller
         ]);
     }
 
-    /* ================= DELETE ================= */
 
     public function destroy($id)
     {
         $order = Order::findOrFail($id);
 
-        // 🔥 optional: restore stock
         foreach ($order->items as $item) {
             $product = Product::find($item->product_id);
             if ($product) {

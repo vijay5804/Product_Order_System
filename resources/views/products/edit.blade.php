@@ -71,7 +71,6 @@
 </div>
 
 <script>
-// layout.blade.php-la neenga ezhuthuna same JS logic ingayum work aagum.
-// ID and data handle panna 'updateForm' ID correct-ah irukanum.
+
 </script>
 @endsection

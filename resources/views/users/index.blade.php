@@ -30,7 +30,6 @@
 
                     <td class="ps-4 fw-semibold">{{ $user->name }}</td>
 
-                    <!-- ✅ CENTER EMAIL -->
                     <td class="text-center text-muted">{{ $user->email }}</td>
 
                     <td class="text-center">
@@ -54,7 +53,6 @@
     </div>
 </div>
 
-<!-- 🔥 ADD USER MODAL -->
 <div class="modal fade" id="addUserModal">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content rounded-4">

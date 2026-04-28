@@ -63,10 +63,8 @@
     <a href="/products/create" class="btn btn-primary">+ Add Product</a>
 </div>
 
-<!-- 🔥 SEARCH INPUT -->
 <input type="text" id="searchInput" class="form-control mb-4" placeholder="Search product...">
 
-<!-- 🔥 PRODUCT LIST WRAPPER -->
 <div id="productList">
 
 <div class="row gap-fix">
@@ -110,7 +108,6 @@
 
 </div>
 
-<!-- 🔥 PAGINATION -->
 <nav class="mt-5">
     <ul class="pagination justify-content-center">
 

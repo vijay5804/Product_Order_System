@@ -75,7 +75,6 @@
 
 <div class="main">
 
-    <!-- SIDEBAR -->
     <div class="sidebar">
         <h4>🛒 Shop Admin</h4>
         <a href="/products"><i class="bi bi-box"></i> Products</a>
@@ -96,7 +95,6 @@
 <script>
 const csrf = document.querySelector('meta[name="csrf-token"]').content;
 
-/* ================= ADD PRODUCT ================= */
 
 let productForm = document.getElementById("productForm");
 
@@ -126,7 +124,6 @@ if(productForm){
     });
 }
 
-/* ================= UPDATE PRODUCT ================= */
 
 let updateForm = document.getElementById("updateForm");
 
@@ -157,7 +154,6 @@ if(updateForm){
     });
 }
 
-/* ================= DELETE ================= */
 
 function deleteProduct(id, btn){
 
@@ -195,7 +191,6 @@ function deleteProduct(id, btn){
     });
 }
 
-/* ================= SEARCH ================= */
 
 let searchInput = document.getElementById("searchInput");
 
