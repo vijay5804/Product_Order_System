@@ -48,13 +48,13 @@ class UserController extends Controller
 
         $user->update($data);
 
-        return response()->json(['status' => true]); // ✅ FIXED
+        return response()->json(['status' => true]); 
     }
 
     public function destroy($id)
     {
         User::findOrFail($id)->delete();
 
-        return response()->json(['status' => true]); // ✅ FIXED
+        return response()->json(['status' => true]); 
     }
 }
