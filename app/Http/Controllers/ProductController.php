@@ -12,7 +12,7 @@ class ProductController extends Controller
     {
         $products = Product::when($request->search, function ($query) use ($request) {
             $query->where('name', 'like', '%' . $request->search . '%');
-        })->latest()->paginate(4); 
+        })->paginate(4); 
 
         return view('products.index', ['products' => $products]);
     }
@@ -45,7 +45,7 @@ class ProductController extends Controller
             'image' => $imageName
         ]);
 
-        return response()->json(['status' => true, 'message' => 'Product added successfully']);
+        return response()->json(['status' => true]);
     }
 
     public function edit($id)
@@ -80,20 +80,35 @@ class ProductController extends Controller
     }
 
     public function destroy($id)
-    {
-        $product = Product::findOrFail($id);
-
-        if ($product->image && File::exists(public_path('uploads/' . $product->image))) {
-            File::delete(public_path('uploads/' . $product->image));
-        }
-
-        $product->delete();
-        return response()->json(['status' => true]);
-    }
+{
+    Product::findOrFail($id)->delete();
+    return response()->json(['status' => true]);
+}
 
     public function search(Request $request)
     {
         $products = Product::where('name', 'like', '%' . $request->search . '%')->get();
         return view('products.search',  ['products' => $products]);
     }
+
+    public function editNEw($id)
+    {
+        $product=Product::findOrFail($id);
+        return response()->json(['status' =>true,'product'=>$product]);
+        
+    }
+public function updatenew($id)
+{
+    $product = Product::findOrFail($id);
+
+    $product->name = "Testing";
+    $product->price = 5667;
+
+    $product->stock = 112;
+
+    $product->save();
+
+    return response()->json(['status' => true,'product' => $product]);
+}
+
 }

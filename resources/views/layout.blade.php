@@ -114,6 +114,7 @@ if(productForm){
         })
         .then(res => res.json())
         .then(data => {
+            console.log(data);
             if(data.status){
                 Swal.fire("Success","Product Added","success")
                 .then(()=> location.href="/products");
@@ -209,6 +210,110 @@ if(searchInput){
         });
     });
 }
+
+
+
+function submitUser(){
+
+    let form = document.getElementById("userForm");
+    let formData = new FormData(form);
+
+    fetch("/users", {
+        method: "POST",
+        body: formData,
+        headers:{
+            'X-CSRF-TOKEN': csrf,
+            'Accept':'application/json'
+        }
+    })
+    .then(res=>res.json())
+    .then(data=>{
+        if(data.status){
+            Swal.fire("Success","User Created","success")
+            .then(()=> location.reload());
+        }else{
+            Swal.fire("Error","Create failed","error");
+        }
+    });
+}
+
+
+
+function editUser(id,name,email){
+    document.getElementById("edit_id").value = id;
+    document.getElementById("edit_name").value = name;
+    document.getElementById("edit_email").value = email;
+
+    new bootstrap.Modal(document.getElementById('editUserModal')).show();
+}
+
+
+
+function updateUser(){
+
+    let id = document.getElementById("edit_id").value;
+
+    let formData = new FormData();
+    formData.append("name", document.getElementById("edit_name").value);
+    formData.append("email", document.getElementById("edit_email").value);
+    formData.append("password", document.getElementById("edit_password").value);
+
+    fetch("/users/"+id, {
+        method:"POST",
+        body: formData,
+        headers:{
+            'X-CSRF-TOKEN': csrf,
+            'X-HTTP-Method-Override':'PUT',
+            'Accept':'application/json'
+        }
+    })
+    .then(res=>res.json())
+    .then(data=>{
+        if(data.status){
+            Swal.fire("Updated","Success","success")
+            .then(()=> location.reload());
+        }else{
+            Swal.fire("Error","Update failed","error");
+        }
+    });
+}
+
+
+
+function deleteUser(id, btn){
+
+    Swal.fire({
+        title:"Delete user?",
+        icon:"warning",
+        showCancelButton:true
+    }).then(res => {
+
+        if(res.isConfirmed){
+
+            fetch("/users/"+id,{
+                method:"POST",
+                headers:{
+                    'X-CSRF-TOKEN': csrf,
+                    'X-HTTP-Method-Override':'DELETE',
+                    'Accept':'application/json'
+                }
+            })
+            .then(res=>res.json())
+            .then(data=>{
+                if(data.status){
+                    Swal.fire("Deleted","","success");
+
+                    btn.closest("tr").remove();
+                }else{
+                    Swal.fire("Error","Delete failed","error");
+                }
+            });
+        }
+    });
+}
+
+
+
 </script>
 
 </body>

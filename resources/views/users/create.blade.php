@@ -1,36 +1,57 @@
 @extends('layout')
 
 @section('content')
-<div class="container mt-4">
-    <div class="card shadow p-4 border-0 rounded-4">
-        <h3 class="mb-3 fw-bold text-dark">Add User</h3>
 
-        <a href="/users" class="btn btn-secondary btn-sm mb-3 rounded-pill px-3">
-            <i class="bi bi-arrow-left"></i> Back to Users
-        </a>
+<div class="row justify-content-center">
+    <div class="col-md-6">
 
-        <form id="userForm">
-            @csrf
+        <div class="card border-0 shadow-sm p-4">
 
-            <div class="mb-3">
-                <label class="form-label fw-bold">Name</label>
-                <input type="text" name="name" class="form-control" placeholder="Enter name" required>
-            </div>
+            <h5 class="mb-3 fw-semibold">Add User</h5>
 
-            <div class="mb-3">
-                <label class="form-label fw-bold">Email</label>
-                <input type="email" name="email" class="form-control" placeholder="Enter email" required>
-            </div>
+            <form method="POST" action="/users">
+                @csrf
 
-            <div class="mb-3">
-                <label class="form-label fw-bold">Password</label>
-                <input type="password" name="password" class="form-control" placeholder="Enter password" required>
-            </div>
+                <!-- NAME -->
+                <div class="mb-3">
+                    <label class="form-label text-muted">Name</label>
+                    <input type="text" name="name" class="form-control" required>
+                </div>
 
-            <button type="submit" class="btn btn-warning w-100 fw-bold shadow-sm">
-                Add User
-            </button>
-        </form>
+                <!-- EMAIL -->
+                <div class="mb-3">
+                    <label class="form-label text-muted">Email</label>
+                    <input type="email" name="email" class="form-control" required>
+                </div>
+
+                <!-- PHONE -->
+                <div class="mb-3">
+                    <label class="form-label text-muted">Phone</label>
+                    <input type="text" name="phone" class="form-control" placeholder="Enter phone number">
+                </div>
+
+                <!-- PASSWORD -->
+                <div class="mb-4">
+                    <label class="form-label text-muted">Password</label>
+                    <input type="password" name="password" class="form-control" required>
+                </div>
+
+                <!-- BUTTONS -->
+                <div class="d-flex justify-content-between">
+                    <a href="/users" class="btn btn-light border">
+                        Cancel
+                    </a>
+
+                    <button type="submit" class="btn btn-warning px-4">
+                        Save
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+
     </div>
 </div>
+
 @endsection

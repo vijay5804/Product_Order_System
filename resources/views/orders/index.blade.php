@@ -3,10 +3,12 @@
 @section('content')
 
 <div class="container mt-4">
+
     <div class="card shadow-lg border-0 rounded-4 p-3">
         
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h4 class="mb-0 fw-bold">📦 Orders List</h4>
+
             <a href="/orders/create" class="btn btn-warning rounded-3 fw-bold shadow-sm">
                 <i class="bi bi-plus-circle"></i> Create Order
             </a>
@@ -14,6 +16,7 @@
 
         <div class="table-responsive">
             <table class="table table-hover align-middle text-center">
+
                 <thead class="table-dark">
                     <tr>
                         <th>S.No</th>
@@ -27,11 +30,16 @@
                 <tbody>
                 @foreach($orders as $order)
                     <tr id="order-row-{{ $order->id }}">
+
                         <td>{{ $loop->iteration }}</td>
-                        <td class="fw-bold text-primary">#{{ $order->id }}</td>
+
+                        <td class="fw-bold text-primary">
+                            #{{ $order->id }}
+                        </td>
+
                         <td>{{ $order->user->name }}</td>
 
-                        <!-- 🔥 STATUS -->
+                        <!-- STATUS -->
                         <td>
                             <span 
                                 class="badge status-toggle p-2 
@@ -45,11 +53,21 @@
                             </span>
                         </td>
 
-                        <td>
+                        <!-- 🔥 UPDATED ACTIONS -->
+                        <td class="d-flex justify-content-center gap-2">
+
+                            <!-- VIEW BUTTON -->
+                            <a href="/orders/{{ $order->id }}" class="btn btn-info btn-sm">
+                                <i class="bi bi-eye"></i>
+                            </a>
+
+                            <!-- DELETE BUTTON -->
                             <button onclick="deleteOrder({{ $order->id }}, this)" class="btn btn-danger btn-sm">
-                                Delete
+                                <i class="bi bi-trash"></i>
                             </button>
+
                         </td>
+
                     </tr>
                 @endforeach
                 </tbody>
@@ -61,9 +79,9 @@
 </div>
 
 <script>
+
 const csrf = '{{ csrf_token() }}';
 
-/* ================= DELETE ================= */
 
 function deleteOrder(id, btn){
 
@@ -89,12 +107,15 @@ function deleteOrder(id, btn){
                     Swal.fire("Deleted!","","success");
                 }
             });
+
         }
+
     });
+
 }
 
-/* ================= STATUS CHANGE ================= */
 
+// STATUS CHANGE
 document.querySelectorAll('.status-toggle').forEach(el => {
 
     el.addEventListener('click', function(){
@@ -102,7 +123,6 @@ document.querySelectorAll('.status-toggle').forEach(el => {
         let id = this.dataset.id;
         let currentStatus = this.dataset.status;
 
-        // 🔥 ALREADY COMPLETED CHECK
         if(currentStatus === 'completed'){
             Swal.fire({
                 icon: "info",
@@ -112,7 +132,6 @@ document.querySelectorAll('.status-toggle').forEach(el => {
             return;
         }
 
-        // 🔥 CONFIRM POPUP
         Swal.fire({
             title:"Change status?",
             text:"Mark as completed?",
@@ -139,7 +158,6 @@ document.querySelectorAll('.status-toggle').forEach(el => {
 
                     if(data.status){
 
-                        // 🔥 UPDATE UI + DATA
                         el.dataset.status = "completed";
 
                         el.innerHTML = `
@@ -161,6 +179,7 @@ document.querySelectorAll('.status-toggle').forEach(el => {
     });
 
 });
+
 </script>
 
 @endsection

@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function index()
+ 
+public function index()
     {
         return view('users.index', ['users' => User::all()]);
     }
@@ -33,15 +34,14 @@ class UserController extends Controller
         return view('users.edit', ['user' => User::findOrFail($id)]);
     }
 
-    public function update(Request $request, $id)
-    {
-        $user = User::findOrFail($id);
+public function update(Request $request, $id)
+{
+    $user = User::findOrFail($id);
 
-        $data = [
-            'name' => $request->name,
-            'email' => $request->email,
-        ];
+    $user->name = $request->name;
+    $user->email = $request->email;
 
+<<<<<<< HEAD
         if ($request->password) {
             $data['password'] = bcrypt($request->password);
         }
@@ -49,7 +49,16 @@ class UserController extends Controller
         $user->update($data);
 
         return response()->json(['status' => true]); 
+=======
+    if ($request->password) {
+        $user->password = bcrypt($request->password);
+>>>>>>> 62fae55 (updated views)
     }
+
+    $user->save();
+
+    return response()->json(['status' => true]);
+}
 
     public function destroy($id)
     {
